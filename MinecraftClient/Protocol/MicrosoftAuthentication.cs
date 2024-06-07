@@ -424,6 +424,10 @@ namespace MinecraftClient.Protocol
             {
                 ConsoleIO.WriteLine(response.ToString());
             }
+            if (response.StatusCode == 429)
+            {
+                return LoginWithXbox(userHash, xstsToken);
+            }
 
             string jsonString = response.Body;
             Json.JSONData json = Json.ParseJson(jsonString);
@@ -446,6 +450,10 @@ namespace MinecraftClient.Protocol
             {
                 ConsoleIO.WriteLine(response.ToString());
             }
+            if (response.StatusCode == 429)
+            {
+                return UserHasGame(accessToken);
+            }
 
             string jsonString = response.Body;
             Json.JSONData json = Json.ParseJson(jsonString);
@@ -461,6 +469,10 @@ namespace MinecraftClient.Protocol
             if (Settings.Config.Logging.DebugMessages)
             {
                 ConsoleIO.WriteLine(response.ToString());
+            }
+            if (response.StatusCode == 429)
+            {
+                return GetUserProfile(accessToken);
             }
 
             string jsonString = response.Body;

@@ -33,6 +33,10 @@ namespace MinecraftClient.Protocol.ProfileKey
                     {
                         ConsoleIO.WriteLine(response.Body.ToString());
                     }
+                    if (response.StatusCode == 429)
+                    {
+                        return GetNewProfileKeys(accessToken, isYggdrasil);
+                    }
                 }
 
                 // see https://github.com/yushijinhun/authlib-injector/blob/da910956eaa30d2f6c2c457222d188aeb53b0d1f/src/main/java/moe/yushi/authlibinjector/httpd/ProfileKeyFilter.java#L49
